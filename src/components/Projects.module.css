@@ -23,6 +23,9 @@
 
 /* Spotlight / Featured Card Styles */
 .featuredSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
   margin-bottom: 5rem;
 }
 

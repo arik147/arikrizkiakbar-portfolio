@@ -18,13 +18,25 @@ const projects = [
   },
   {
     title: "Waste Bank Management System",
-    category: "Data Framework & BI",
-    description: "Standardized collection using Apps Script and Google Sheets. Designed Looker Studio dashboards for real-time operational metrics and waste trends.",
+    category: "Featured Spotlight • Data Framework & BI",
+    description: "Standardized collection using Apps Script and Google Sheets. Designed Looker Studio dashboards for real-time operational metrics, user behaviors, and waste trends. Automated cleaning workflows and integrated Sheets with Looker Studio to provide near real-time updates.",
     image: "/dashboard-waste-bank.png",
-    tags: ["Apps Script", "Looker Studio", "Google Sheets"],
+    tags: ["Apps Script", "Looker Studio", "Google Sheets", "BI Development"],
     links: [
       { label: "App", url: "https://bit.ly/BankSampahBerkahApp" },
       { label: "Dashboard", url: "https://lookerstudio.google.com/u/0/reporting/f104b007-8130-4741-978d-7ab351bb1102/page/tdadD" }
+    ],
+    isFeatured: true
+  },
+  {
+    title: "SD Ciwaregu 1 School Website Backend",
+    category: "Backend & Cloud Infrastructure",
+    description: "Developed a robust Express.js backend for student registration and grade management. Integrated Cloudinary for media, containerized with Docker, deployed on Cloud Run, and set up CI/CD with Cloud Build and PostgreSQL on Cloud SQL.",
+    image: "/ciwaregu-be.png",
+    tags: ["Express.js", "Docker", "Cloud Run", "PostgreSQL", "Cloud Build", "Cloudinary"],
+    links: [
+      { label: "Canva", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
+      { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
     ]
   },
   {
@@ -36,17 +48,6 @@ const projects = [
     links: [
       { label: "YouTube", url: "https://www.youtube.com/watch?v=vmTqlE4pvWY" },
       { label: "GitHub", url: "https://github.com/arik147/diagnese-app" }
-    ]
-  },
-  {
-    title: "SD Ciwaregu 1 School Website Backend",
-    category: "Cloud Backend & DevOps",
-    description: "Developed the core backend with Express.js enabling student registration and score management. Configured PostgreSQL database on Google Cloud SQL, built secure containerized environments using Docker, and automated CI/CD workflows using Cloud Build to deploy on Cloud Run.",
-    image: "/ciwaregu-be.png",
-    tags: ["Express.js", "Docker", "Cloud Run", "PostgreSQL", "Cloud SQL"],
-    links: [
-      { label: "Slides", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
-      { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
     ]
   },
   {
@@ -111,7 +112,7 @@ export default function Projects() {
     }
   };
 
-  const featuredProject = projects.find(p => p.isFeatured);
+  const featuredProjects = projects.filter(p => p.isFeatured);
   const regularProjects = projects.filter(p => !p.isFeatured);
 
   return (
@@ -131,47 +132,50 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Featured Spotlight Project */}
-        {featuredProject && (
-          <motion.div 
-            className={styles.featuredSection}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className={styles.featuredCard}>
-              <div className={styles.featuredImageWrapper}>
-                <Image 
-                  src={featuredProject.image} 
-                  alt={featuredProject.title} 
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  priority
-                />
-              </div>
-              <div className={styles.featuredCardContent}>
-                <span className={styles.category}>{featuredProject.category}</span>
-                <h3 className={styles.featuredTitle}>{featuredProject.title}</h3>
-                <p className={styles.featuredDesc}>{featuredProject.description}</p>
-                
-                <div className={styles.featuredTags}>
-                  {featuredProject.tags.map((tag, tIndex) => (
-                    <span key={tIndex} className={styles.featuredTag}>{tag}</span>
-                  ))}
+        {/* Featured Spotlight Projects List */}
+        {featuredProjects.length > 0 && (
+          <div className={styles.featuredSection}>
+            {featuredProjects.map((featuredProject, index) => (
+              <motion.div 
+                key={index}
+                className={styles.featuredCard}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+              >
+                <div className={styles.featuredImageWrapper}>
+                  <Image 
+                    src={featuredProject.image} 
+                    alt={featuredProject.title} 
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    priority={index === 0}
+                  />
                 </div>
+                <div className={styles.featuredCardContent}>
+                  <span className={styles.category}>{featuredProject.category}</span>
+                  <h3 className={styles.featuredTitle}>{featuredProject.title}</h3>
+                  <p className={styles.featuredDesc}>{featuredProject.description}</p>
+                  
+                  <div className={styles.featuredTags}>
+                    {featuredProject.tags.map((tag, tIndex) => (
+                      <span key={tIndex} className={styles.featuredTag}>{tag}</span>
+                    ))}
+                  </div>
 
-                <div className={styles.linksContainer}>
-                  {featuredProject.links.map((link, lIndex) => (
-                    <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                      {link.label}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                    </a>
-                  ))}
+                  <div className={styles.linksContainer}>
+                    {featuredProject.links.map((link, lIndex) => (
+                      <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                        {link.label}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </div>
         )}
 
         {/* Regular Projects Grid */}
