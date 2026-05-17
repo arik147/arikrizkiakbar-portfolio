@@ -39,6 +39,17 @@ const projects = [
     ]
   },
   {
+    title: "SD Ciwaregu 1 School Website Backend",
+    category: "Cloud Backend & DevOps",
+    description: "Developed the core backend with Express.js enabling student registration and score management. Configured PostgreSQL database on Google Cloud SQL, built secure containerized environments using Docker, and automated CI/CD workflows using Cloud Build to deploy on Cloud Run.",
+    image: "/ciwaregu-be.png",
+    tags: ["Express.js", "Docker", "Cloud Run", "PostgreSQL", "Cloud SQL"],
+    links: [
+      { label: "Slides", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
+      { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
+    ]
+  },
+  {
     title: "Cyclistic Bike-Share Analysis",
     category: "Data Analytics",
     description: "Analyzed user behavior for the Google Data Analytics Capstone. Identified ride patterns to convert casual riders into loyal annual members.",
