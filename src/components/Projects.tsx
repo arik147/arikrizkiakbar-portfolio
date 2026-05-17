@@ -9,7 +9,7 @@ const projects = [
     title: "DataCo Supply Chain Analytics & Predictive Delay Risk Modeling",
     category: "Featured Spotlight • ML & Operations",
     description: "Built an end-to-end delay risk modeling framework on 180K+ shipments with 83% prediction precision. Engineered strictly without data leakage to guarantee real-time Order Management System compatibility, and uncovered critical financial policies showing discount rates >20% directly trigger negative profit margins.",
-    image: "/supply-chain-analytics.png",
+    image: "/dataco_portfolio_thumbnail.png",
     tags: ["Random Forest", "Supply Chain Analytics", "Anti-Data Leakage", "Financial Optimization", "Python"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/dataco-supply-chain-analytics" }
