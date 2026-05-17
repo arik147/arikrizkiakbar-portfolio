@@ -29,28 +29,6 @@ const projects = [
     isFeatured: true
   },
   {
-    title: "SD Ciwaregu 1 School Website Backend",
-    category: "Backend & Cloud Infrastructure",
-    description: "Developed a robust Express.js backend for student registration and grade management. Integrated Cloudinary for media, containerized with Docker, deployed on Cloud Run, and set up CI/CD with Cloud Build and PostgreSQL on Cloud SQL.",
-    image: "/ciwaregu-be.png",
-    tags: ["Express.js", "Docker", "Cloud Run", "PostgreSQL", "Cloud Build", "Cloudinary"],
-    links: [
-      { label: "Canva", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
-      { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
-    ]
-  },
-  {
-    title: "Diagnese App - Bangkit Capstone",
-    category: "Cloud & ML API",
-    description: "Developed a RESTful API using Flask for symptom-based diagnosis. Deployed on Google Cloud Run using Docker and CI/CD with Cloud Build.",
-    image: "/diagnese-app.jpg",
-    tags: ["Cloud Run", "Flask", "Docker", "ML"],
-    links: [
-      { label: "YouTube", url: "https://www.youtube.com/watch?v=vmTqlE4pvWY" },
-      { label: "GitHub", url: "https://github.com/arik147/diagnese-app" }
-    ]
-  },
-  {
     title: "Cyclistic Bike-Share Analysis",
     category: "Data Analytics",
     description: "Analyzed user behavior for the Google Data Analytics Capstone. Identified ride patterns to convert casual riders into loyal annual members.",
@@ -88,6 +66,28 @@ const projects = [
     tags: ["K-Means", "RFM", "Clustering", "Retention"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/customer-segmentation-retail" }
+    ]
+  },
+  {
+    title: "Diagnese App - Bangkit Capstone",
+    category: "Cloud & ML API",
+    description: "Developed a RESTful API using Flask for symptom-based diagnosis. Deployed on Google Cloud Run using Docker and CI/CD with Cloud Build.",
+    image: "/diagnese-app.jpg",
+    tags: ["Cloud Run", "Flask", "Docker", "ML"],
+    links: [
+      { label: "YouTube", url: "https://www.youtube.com/watch?v=vmTqlE4pvWY" },
+      { label: "GitHub", url: "https://github.com/arik147/diagnese-app" }
+    ]
+  },
+  {
+    title: "SD Ciwaregu 1 School Website Backend",
+    category: "Backend & Cloud Infrastructure",
+    description: "Developed a robust Express.js backend for student registration and grade management. Integrated Cloudinary for media, containerized with Docker, deployed on Cloud Run, and set up CI/CD with Cloud Build and PostgreSQL on Cloud SQL.",
+    image: "/ciwaregu-be.png",
+    tags: ["Express.js", "Docker", "Cloud Run", "PostgreSQL", "Cloud Build", "Cloudinary"],
+    links: [
+      { label: "Canva", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
+      { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
     ]
   }
 ];
@@ -132,7 +132,7 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Featured Spotlight Projects List */}
+        {/* Featured Spotlight Projects 2-Column Grid */}
         {featuredProjects.length > 0 && (
           <div className={styles.featuredSection}>
             {featuredProjects.map((featuredProject, index) => (
