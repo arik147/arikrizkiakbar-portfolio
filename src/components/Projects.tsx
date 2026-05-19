@@ -4,29 +4,47 @@ import Image from 'next/image';
 import styles from './Projects.module.css';
 import { motion, Variants } from 'framer-motion';
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  tags: string[];
+  links: { label: string; url: string; }[];
+  isFeatured?: boolean;
+};
+
+const projects: Project[] = [
+  {
+    title: "Nusantara Air Sentinel: Near Real-Time Weather & Air Quality",
+    category: "Data Engineering & BI",
+    description: "Built an end-to-end modern data stack ETL pipeline and BI dashboard to fetch, process, and visualize real-time weather and air quality data across 52 Indonesian cities using a zero-cost serverless architecture.",
+    image: "/nusantara-air-sentinel.png",
+    tags: ["Python", "Streamlit", "Supabase", "GitHub Actions", "ETL"],
+    links: [
+      { label: "GitHub", url: "https://github.com/arik147/nusantara-air-sentinel" }
+    ]
+  },
   {
     title: "DataCo Supply Chain Analytics & Predictive Delay Risk Modeling",
-    category: "Featured Spotlight • ML & Operations",
+    category: "ML & Operations",
     description: "Built an end-to-end delay risk modeling framework on 180K+ shipments with 83% prediction precision. Engineered strictly without data leakage to guarantee real-time Order Management System compatibility, and uncovered critical financial policies showing discount rates >20% directly trigger negative profit margins.",
     image: "/dataco_portfolio_thumbnail.png",
     tags: ["Random Forest", "Supply Chain Analytics", "Anti-Data Leakage", "Financial Optimization", "Python"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/dataco-supply-chain-analytics" }
-    ],
-    isFeatured: true
+    ]
   },
   {
     title: "Waste Bank Management System",
-    category: "Featured Spotlight • Data Framework & BI",
+    category: "Data Framework & BI",
     description: "Standardized collection using Apps Script and Google Sheets. Designed Looker Studio dashboards for real-time operational metrics, user behaviors, and waste trends. Automated cleaning workflows and integrated Sheets with Looker Studio to provide near real-time updates.",
     image: "/dashboard-waste-bank.png",
     tags: ["Apps Script", "Looker Studio", "Google Sheets", "BI Development"],
     links: [
       { label: "App", url: "https://bit.ly/BankSampahBerkahApp" },
       { label: "Dashboard", url: "https://lookerstudio.google.com/u/0/reporting/f104b007-8130-4741-978d-7ab351bb1102/page/tdadD" }
-    ],
-    isFeatured: true
+    ]
   },
   {
     title: "Cyclistic Bike-Share Analysis",
@@ -118,7 +136,7 @@ export default function Projects() {
   return (
     <section id="works" className={styles.projects}>
       <div className="container">
-        <motion.div 
+        <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -136,7 +154,7 @@ export default function Projects() {
         {featuredProjects.length > 0 && (
           <div className={styles.featuredSection}>
             {featuredProjects.map((featuredProject, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 className={styles.featuredCard}
                 initial={{ opacity: 0, y: 40 }}
@@ -145,10 +163,11 @@ export default function Projects() {
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
               >
                 <div className={styles.featuredImageWrapper}>
-                  <Image 
-                    src={featuredProject.image} 
-                    alt={featuredProject.title} 
+                  <Image
+                    src={featuredProject.image}
+                    alt={featuredProject.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ objectFit: 'cover' }}
                     priority={index === 0}
                   />
@@ -157,7 +176,7 @@ export default function Projects() {
                   <span className={styles.category}>{featuredProject.category}</span>
                   <h3 className={styles.featuredTitle}>{featuredProject.title}</h3>
                   <p className={styles.featuredDesc}>{featuredProject.description}</p>
-                  
+
                   <div className={styles.featuredTags}>
                     {featuredProject.tags.map((tag, tIndex) => (
                       <span key={tIndex} className={styles.featuredTag}>{tag}</span>
@@ -168,7 +187,7 @@ export default function Projects() {
                     {featuredProject.links.map((link, lIndex) => (
                       <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
                         {link.label}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10" /></svg>
                       </a>
                     ))}
                   </div>
@@ -179,7 +198,7 @@ export default function Projects() {
         )}
 
         {/* Regular Projects Grid */}
-        <motion.div 
+        <motion.div
           className={styles.grid}
           variants={containerVariants}
           initial="hidden"
@@ -189,10 +208,11 @@ export default function Projects() {
           {regularProjects.map((project, index) => (
             <motion.div key={index} className={styles.card} variants={itemVariants}>
               <div className={styles.imageWrapper}>
-                <Image 
-                  src={project.image} 
-                  alt={project.title} 
+                <Image
+                  src={project.image}
+                  alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{ objectFit: 'cover' }}
                 />
                 <div className={styles.overlay}>
@@ -211,7 +231,7 @@ export default function Projects() {
                   {project.links.map((link, lIndex) => (
                     <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
                       {link.label}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10" /></svg>
                     </a>
                   ))}
                 </div>
