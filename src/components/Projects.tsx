@@ -22,6 +22,7 @@ const projects: Project[] = [
     image: "/nusantara-air-sentinel.png",
     tags: ["Python", "Streamlit", "Supabase", "GitHub Actions", "ETL"],
     links: [
+      { label: "App", url: "https://nusantara-air-sentinel.streamlit.app/" },
       { label: "GitHub", url: "https://github.com/arik147/nusantara-air-sentinel" }
     ]
   },
