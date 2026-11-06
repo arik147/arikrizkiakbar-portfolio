@@ -15,9 +15,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Arik Rizki Akbar | Data Analyst Portfolio",
-  description: "Professional portfolio of Arik Rizki Akbar, a Data Analyst specializing in data visualization, statistical analysis, and machine learning insights.",
-  keywords: ["Data Analyst", "Portfolio", "Data Science", "Arik Rizki Akbar", "Data Visualization"],
+  title: "Arik Rizki Akbar | Data Analyst & Analytics Portfolio",
+  description: "Professional portfolio of Arik Rizki Akbar, a Data Analyst specializing in A/B testing & experimentation, modern BI dashboards, statistical modeling, and data pipelines.",
+  keywords: ["Data Analyst", "Portfolio", "A/B Testing", "Experimentation", "Data Science", "Arik Rizki Akbar", "Data Visualization", "Looker Studio", "Python", "SQL"],
+  openGraph: {
+    title: "Arik Rizki Akbar | Data Analyst Portfolio",
+    description: "Data Analyst specializing in statistical experimentation, machine learning, and BI architecture.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Arik Rizki Akbar Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arik Rizki Akbar | Data Analyst Portfolio",
+    description: "Data Analyst specializing in statistical experimentation, machine learning, and BI architecture.",
+  },
 };
 
 export default function RootLayout({

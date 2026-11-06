@@ -22,7 +22,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div className="container">
-          <p>© 2024 Arik Rizki Akbar</p>
+          <p>© {new Date().getFullYear()} Arik Rizki Akbar. All rights reserved.</p>
         </div>
       </footer>
     </main>

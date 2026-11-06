@@ -1,8 +1,24 @@
 "use client";
 
+import { useState } from 'react';
 import Image from 'next/image';
 import styles from './Projects.module.css';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
+
+const filterCategories = [
+  "All",
+  "Product & Experimentation",
+  "Business Intelligence & SQL",
+  "Machine Learning & AI",
+  "Data Engineering & Cloud"
+] as const;
+
+type FilterCategory = typeof filterCategories[number];
+
+type Metric = {
+  label: string;
+  value: string;
+};
 
 type Project = {
   title: string;
@@ -12,9 +28,28 @@ type Project = {
   tags: string[];
   links: { label: string; url: string; }[];
   isFeatured?: boolean;
+  metrics?: Metric[];
+  filterGroups: FilterCategory[];
 };
 
 const projects: Project[] = [
+  {
+    title: "E-Commerce Checkout Redesign: A/B Testing & Funnel Optimization",
+    category: "Product Analytics & Experimentation",
+    description: "Conducted an end-to-end randomized controlled trial on 124K+ sessions evaluating a single-page checkout flow. Verified experiment validity with SRM check (p = 0.65), achieved a statistically significant +16.4% relative conversion lift (p < 0.0001) driven by mobile UX improvements (+18.6%), while maintaining neutral AOV guardrails to project +$2.47M in incremental annual revenue.",
+    image: "/ab-testing-funnel.png",
+    tags: ["A/B Testing", "Hypothesis Testing", "Funnel Analysis", "Python", "Statistical Modeling", "CRO"],
+    links: [
+      { label: "GitHub", url: "https://github.com/arik147/ecommerce-ab-testing-funnel" }
+    ],
+    isFeatured: true,
+    metrics: [
+      { label: "CR Lift", value: "+16.4%" },
+      { label: "P-Value", value: "< 0.0001" },
+      { label: "Est. Revenue", value: "+$2.47M" }
+    ],
+    filterGroups: ["Product & Experimentation"]
+  },
   {
     title: "Nusantara Air Sentinel: Near Real-Time Weather & Air Quality",
     category: "Data Engineering & BI",
@@ -24,7 +59,14 @@ const projects: Project[] = [
     links: [
       { label: "App", url: "https://nusantara-air-sentinel.streamlit.app/" },
       { label: "GitHub", url: "https://github.com/arik147/nusantara-air-sentinel" }
-    ]
+    ],
+    isFeatured: true,
+    metrics: [
+      { label: "Coverage", value: "52 Cities" },
+      { label: "Infrastructure", value: "$0 Serverless" },
+      { label: "Pipeline", value: "Near Real-Time" }
+    ],
+    filterGroups: ["Data Engineering & Cloud", "Business Intelligence & SQL"]
   },
   {
     title: "DataCo Supply Chain Analytics & Predictive Delay Risk Modeling",
@@ -34,7 +76,13 @@ const projects: Project[] = [
     tags: ["Random Forest", "Supply Chain Analytics", "Anti-Data Leakage", "Financial Optimization", "Python"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/dataco-supply-chain-analytics" }
-    ]
+    ],
+    metrics: [
+      { label: "Precision", value: "83%" },
+      { label: "Dataset", value: "180K+ Orders" },
+      { label: "Framework", value: "Anti-Leakage" }
+    ],
+    filterGroups: ["Machine Learning & AI", "Business Intelligence & SQL"]
   },
   {
     title: "Waste Bank Management System",
@@ -45,7 +93,13 @@ const projects: Project[] = [
     links: [
       { label: "App", url: "https://bit.ly/BankSampahBerkahApp" },
       { label: "Dashboard", url: "https://lookerstudio.google.com/u/0/reporting/f104b007-8130-4741-978d-7ab351bb1102/page/tdadD" }
-    ]
+    ],
+    metrics: [
+      { label: "BI Platform", value: "Looker Studio" },
+      { label: "Workflow", value: "Automated Clean" },
+      { label: "Domain", value: "Waste Bank Ops" }
+    ],
+    filterGroups: ["Business Intelligence & SQL"]
   },
   {
     title: "Cyclistic Bike-Share Analysis",
@@ -55,7 +109,12 @@ const projects: Project[] = [
     tags: ["R", "Tableau", "Marketing Analytics"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/cyclistic-bike-share-analysis" }
-    ]
+    ],
+    metrics: [
+      { label: "Program", value: "Google Capstone" },
+      { label: "Objective", value: "Casual to Member" }
+    ],
+    filterGroups: ["Product & Experimentation", "Business Intelligence & SQL"]
   },
   {
     title: "Sales Analysis Case Study",
@@ -65,7 +124,12 @@ const projects: Project[] = [
     tags: ["BigQuery", "SQL", "Python", "Pandas"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/sales-case-study" }
-    ]
+    ],
+    metrics: [
+      { label: "Engine", value: "BigQuery SQL" },
+      { label: "Domain", value: "Retail Analytics" }
+    ],
+    filterGroups: ["Business Intelligence & SQL"]
   },
   {
     title: "Twitter Sentiment Analysis",
@@ -75,7 +139,12 @@ const projects: Project[] = [
     tags: ["NLP", "Transformers", "Statistics"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/twitter-sentiment-analysis" }
-    ]
+    ],
+    metrics: [
+      { label: "Model", value: "Transformers" },
+      { label: "Task", value: "Sentiment Mining" }
+    ],
+    filterGroups: ["Machine Learning & AI"]
   },
   {
     title: "Customer Behavior Analysis & Segmentation",
@@ -85,7 +154,13 @@ const projects: Project[] = [
     tags: ["K-Means", "RFM", "Clustering", "Retention"],
     links: [
       { label: "GitHub", url: "https://github.com/arik147/customer-segmentation-retail" }
-    ]
+    ],
+    metrics: [
+      { label: "Cohort", value: "100K+ Customers" },
+      { label: "Method", value: "RFM & K-Means" },
+      { label: "Projected Lift", value: "+15% Retention" }
+    ],
+    filterGroups: ["Product & Experimentation", "Machine Learning & AI"]
   },
   {
     title: "Diagnese App - Bangkit Capstone",
@@ -96,7 +171,12 @@ const projects: Project[] = [
     links: [
       { label: "YouTube", url: "https://www.youtube.com/watch?v=vmTqlE4pvWY" },
       { label: "GitHub", url: "https://github.com/arik147/diagnese-app" }
-    ]
+    ],
+    metrics: [
+      { label: "Deployment", value: "Cloud Run" },
+      { label: "Program", value: "Bangkit Capstone" }
+    ],
+    filterGroups: ["Machine Learning & AI", "Data Engineering & Cloud"]
   },
   {
     title: "SD Ciwaregu 1 School Website Backend",
@@ -107,32 +187,42 @@ const projects: Project[] = [
     links: [
       { label: "Canva", url: "https://www.canva.com/design/DAGkmftn7WQ/UsudrjuSZp3vQRapAJIdKg/edit" },
       { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
-    ]
+    ],
+    metrics: [
+      { label: "Backend", value: "Express & Docker" },
+      { label: "Database", value: "Cloud SQL Postgres" }
+    ],
+    filterGroups: ["Data Engineering & Cloud"]
   }
 ];
 
 export default function Projects() {
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15
+        staggerChildren: 0.12
       }
     }
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
-  const featuredProjects = projects.filter(p => p.isFeatured);
-  const regularProjects = projects.filter(p => !p.isFeatured);
+  const isAll = activeCategory === "All";
+  const featuredProjects = isAll ? projects.filter(p => p.isFeatured) : [];
+  const regularProjects = isAll
+    ? projects.filter(p => !p.isFeatured)
+    : projects.filter(p => p.filterGroups.includes(activeCategory));
 
   return (
     <section id="works" className={styles.projects}>
@@ -147,8 +237,21 @@ export default function Projects() {
           <span className="mono">Selected Works</span>
           <h2 className={styles.sectionTitle}>Featured Projects</h2>
           <p className={styles.sectionDesc}>
-            Turning complex datasets into actionable intelligence across various industries.
+            Turning complex datasets into actionable intelligence across experimentation, business intelligence, and machine learning.
           </p>
+
+          {/* Category Filter Tabs */}
+          <div className={styles.filterContainer}>
+            {filterCategories.map((category) => (
+              <button
+                key={category}
+                className={`${styles.filterButton} ${activeCategory === category ? styles.filterButtonActive : ''}`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Featured Spotlight Projects 2-Column Grid */}
@@ -156,7 +259,7 @@ export default function Projects() {
           <div className={styles.featuredSection}>
             {featuredProjects.map((featuredProject, index) => (
               <motion.div
-                key={index}
+                key={featuredProject.title}
                 className={styles.featuredCard}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -177,6 +280,18 @@ export default function Projects() {
                   <span className={styles.category}>{featuredProject.category}</span>
                   <h3 className={styles.featuredTitle}>{featuredProject.title}</h3>
                   <p className={styles.featuredDesc}>{featuredProject.description}</p>
+
+                  {/* Highlight Metrics */}
+                  {featuredProject.metrics && featuredProject.metrics.length > 0 && (
+                    <div className={styles.metricsContainer}>
+                      {featuredProject.metrics.map((metric, mIdx) => (
+                        <div key={mIdx} className={styles.metricItem}>
+                          <span className={styles.metricValue}>{metric.value}</span>
+                          <span className={styles.metricLabel}>{metric.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   <div className={styles.featuredTags}>
                     {featuredProject.tags.map((tag, tIndex) => (
@@ -199,47 +314,68 @@ export default function Projects() {
         )}
 
         {/* Regular Projects Grid */}
-        <motion.div
-          className={styles.grid}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {regularProjects.map((project, index) => (
-            <motion.div key={index} className={styles.card} variants={itemVariants}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className={styles.overlay}>
-                  <div className={styles.tags}>
-                    {project.tags.map((tag, tIndex) => (
-                      <span key={tIndex} className={styles.tag}>{tag}</span>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            className={styles.grid}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            {regularProjects.map((project) => (
+              <motion.div
+                key={project.title}
+                className={styles.card}
+                variants={itemVariants}
+                layout
+              >
+                <div className={styles.imageWrapper}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div className={styles.overlay}>
+                    <div className={styles.tags}>
+                      {project.tags.map((tag, tIndex) => (
+                        <span key={tIndex} className={styles.tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.cardContent}>
+                  <span className={styles.category}>{project.category}</span>
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <p className={styles.projectDesc}>{project.description}</p>
+
+                  {/* Highlight Metrics */}
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div className={styles.metricsContainer}>
+                      {project.metrics.map((metric, mIdx) => (
+                        <div key={mIdx} className={styles.metricItem}>
+                          <span className={styles.metricValue}>{metric.value}</span>
+                          <span className={styles.metricLabel}>{metric.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className={styles.linksContainer}>
+                    {project.links.map((link, lIndex) => (
+                      <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                        {link.label}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10" /></svg>
+                      </a>
                     ))}
                   </div>
                 </div>
-              </div>
-              <div className={styles.cardContent}>
-                <span className={styles.category}>{project.category}</span>
-                <h3 className={styles.projectTitle}>{project.title}</h3>
-                <p className={styles.projectDesc}>{project.description}</p>
-                <div className={styles.linksContainer}>
-                  {project.links.map((link, lIndex) => (
-                    <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                      {link.label}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10" /></svg>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
