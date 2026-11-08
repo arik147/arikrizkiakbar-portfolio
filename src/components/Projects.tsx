@@ -27,7 +27,6 @@ type Project = {
   image: string;
   tags: string[];
   links: { label: string; url: string; }[];
-  isFeatured?: boolean;
   metrics?: Metric[];
   filterGroups: FilterCategory[];
 };
@@ -42,13 +41,29 @@ const projects: Project[] = [
     links: [
       { label: "GitHub", url: "https://github.com/arik147/ecommerce-ab-testing-funnel" }
     ],
-    isFeatured: true,
     metrics: [
       { label: "CR Lift", value: "+16.4%" },
       { label: "P-Value", value: "< 0.0001" },
       { label: "Est. Revenue", value: "+$2.47M" }
     ],
     filterGroups: ["Product & Experimentation"]
+  },
+  {
+    title: "Enterprise Omnichannel Retail: Commercial Performance & Margin Leakage",
+    category: "Commercial Analytics & BI",
+    description: "Architected a multi-fact Star Schema Power BI solution analyzing 43K+ orders across 4 channels to evaluate top-line revenue vs budget quotas. Diagnosed post-campaign margin leakage where aggressive marketplace discounting compressed gross margins by 70 bps despite an overall +11.5% YoY sales growth.",
+    image: "/enterprise-retail-powerbi.png",
+    tags: ["Power BI", "DAX", "Star Schema", "Commercial Analytics", "Pricing Diagnostics", "FP&A"],
+    links: [
+      { label: "Report PDF", url: "/Enterprise_Retail_Commercial_Analytics.pdf" },
+      { label: "GitHub", url: "https://github.com/arik147/enterprise-retail-powerbi" }
+    ],
+    metrics: [
+      { label: "Net Revenue", value: "$35M" },
+      { label: "YoY Lift", value: "+115.5%" },
+      { label: "Margin Leakage", value: "-70 bps" }
+    ],
+    filterGroups: ["Business Intelligence & SQL", "Product & Experimentation"]
   },
   {
     title: "Nusantara Air Sentinel: Near Real-Time Weather & Air Quality",
@@ -60,7 +75,6 @@ const projects: Project[] = [
       { label: "App", url: "https://nusantara-air-sentinel.streamlit.app/" },
       { label: "GitHub", url: "https://github.com/arik147/nusantara-air-sentinel" }
     ],
-    isFeatured: true,
     metrics: [
       { label: "Coverage", value: "52 Cities" },
       { label: "Infrastructure", value: "$0 Serverless" },
@@ -85,6 +99,22 @@ const projects: Project[] = [
     filterGroups: ["Machine Learning & AI", "Business Intelligence & SQL"]
   },
   {
+    title: "Customer Behavior Analysis & Segmentation",
+    category: "Retail Analytics",
+    description: "Segmented 100K+ retail customers using RFM and K-Means clustering. Strategies projected to boost revenue by 15% through targeted retention.",
+    image: "/customer-analysis.png",
+    tags: ["K-Means", "RFM", "Clustering", "Retention"],
+    links: [
+      { label: "GitHub", url: "https://github.com/arik147/customer-segmentation-retail" }
+    ],
+    metrics: [
+      { label: "Cohort", value: "100K+ Customers" },
+      { label: "Method", value: "RFM & K-Means" },
+      { label: "Projected Lift", value: "+15% Retention" }
+    ],
+    filterGroups: ["Product & Experimentation", "Machine Learning & AI"]
+  },
+  {
     title: "Waste Bank Management System",
     category: "Data Framework & BI",
     description: "Standardized collection using Apps Script and Google Sheets. Designed Looker Studio dashboards for real-time operational metrics, user behaviors, and waste trends. Automated cleaning workflows and integrated Sheets with Looker Studio to provide near real-time updates.",
@@ -98,6 +128,21 @@ const projects: Project[] = [
       { label: "BI Platform", value: "Looker Studio" },
       { label: "Workflow", value: "Automated Clean" },
       { label: "Domain", value: "Waste Bank Ops" }
+    ],
+    filterGroups: ["Business Intelligence & SQL"]
+  },
+  {
+    title: "Sales Analysis Case Study",
+    category: "SQL & BigQuery",
+    description: "Analyzed global retail sales data using BigQuery for efficient extraction and trend analysis. Visualized findings using Python (Pandas/Seaborn).",
+    image: "/revoU-case-study.png",
+    tags: ["BigQuery", "SQL", "Python", "Pandas"],
+    links: [
+      { label: "GitHub", url: "https://github.com/arik147/sales-case-study" }
+    ],
+    metrics: [
+      { label: "Engine", value: "BigQuery SQL" },
+      { label: "Domain", value: "Retail Analytics" }
     ],
     filterGroups: ["Business Intelligence & SQL"]
   },
@@ -117,21 +162,6 @@ const projects: Project[] = [
     filterGroups: ["Product & Experimentation", "Business Intelligence & SQL"]
   },
   {
-    title: "Sales Analysis Case Study",
-    category: "SQL & BigQuery",
-    description: "Analyzed global retail sales data using BigQuery for efficient extraction and trend analysis. Visualized findings using Python (Pandas/Seaborn).",
-    image: "/revoU-case-study.png",
-    tags: ["BigQuery", "SQL", "Python", "Pandas"],
-    links: [
-      { label: "GitHub", url: "https://github.com/arik147/sales-case-study" }
-    ],
-    metrics: [
-      { label: "Engine", value: "BigQuery SQL" },
-      { label: "Domain", value: "Retail Analytics" }
-    ],
-    filterGroups: ["Business Intelligence & SQL"]
-  },
-  {
     title: "Twitter Sentiment Analysis",
     category: "NLP & Machine Learning",
     description: "Built an NLP pipeline using Transformers to classify tweet sentiment. Preprocessed data and analyzed engagement across sentiment categories.",
@@ -145,22 +175,6 @@ const projects: Project[] = [
       { label: "Task", value: "Sentiment Mining" }
     ],
     filterGroups: ["Machine Learning & AI"]
-  },
-  {
-    title: "Customer Behavior Analysis & Segmentation",
-    category: "Retail Analytics",
-    description: "Segmented 100K+ retail customers using RFM and K-Means clustering. Strategies projected to boost revenue by 15% through targeted retention.",
-    image: "/customer-analysis.png",
-    tags: ["K-Means", "RFM", "Clustering", "Retention"],
-    links: [
-      { label: "GitHub", url: "https://github.com/arik147/customer-segmentation-retail" }
-    ],
-    metrics: [
-      { label: "Cohort", value: "100K+ Customers" },
-      { label: "Method", value: "RFM & K-Means" },
-      { label: "Projected Lift", value: "+15% Retention" }
-    ],
-    filterGroups: ["Product & Experimentation", "Machine Learning & AI"]
   },
   {
     title: "Diagnese App - Bangkit Capstone",
@@ -204,7 +218,7 @@ export default function Projects() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12
+        staggerChildren: 0.08
       }
     }
   };
@@ -214,14 +228,12 @@ export default function Projects() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
-  const isAll = activeCategory === "All";
-  const featuredProjects = isAll ? projects.filter(p => p.isFeatured) : [];
-  const regularProjects = isAll
-    ? projects.filter(p => !p.isFeatured)
+  const filteredProjects = activeCategory === "All"
+    ? projects
     : projects.filter(p => p.filterGroups.includes(activeCategory));
 
   return (
@@ -235,7 +247,7 @@ export default function Projects() {
           transition={{ duration: 0.8 }}
         >
           <span className="mono">Selected Works</span>
-          <h2 className={styles.sectionTitle}>Featured Projects</h2>
+          <h2 className={styles.sectionTitle}>Projects Portfolio</h2>
           <p className={styles.sectionDesc}>
             Turning complex datasets into actionable intelligence across experimentation, business intelligence, and machine learning.
           </p>
@@ -254,66 +266,7 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Featured Spotlight Projects 2-Column Grid */}
-        {featuredProjects.length > 0 && (
-          <div className={styles.featuredSection}>
-            {featuredProjects.map((featuredProject, index) => (
-              <motion.div
-                key={featuredProject.title}
-                className={styles.featuredCard}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-              >
-                <div className={styles.featuredImageWrapper}>
-                  <Image
-                    src={featuredProject.image}
-                    alt={featuredProject.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    style={{ objectFit: 'cover' }}
-                    priority={index === 0}
-                  />
-                </div>
-                <div className={styles.featuredCardContent}>
-                  <span className={styles.category}>{featuredProject.category}</span>
-                  <h3 className={styles.featuredTitle}>{featuredProject.title}</h3>
-                  <p className={styles.featuredDesc}>{featuredProject.description}</p>
-
-                  {/* Highlight Metrics */}
-                  {featuredProject.metrics && featuredProject.metrics.length > 0 && (
-                    <div className={styles.metricsContainer}>
-                      {featuredProject.metrics.map((metric, mIdx) => (
-                        <div key={mIdx} className={styles.metricItem}>
-                          <span className={styles.metricValue}>{metric.value}</span>
-                          <span className={styles.metricLabel}>{metric.label}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className={styles.featuredTags}>
-                    {featuredProject.tags.map((tag, tIndex) => (
-                      <span key={tIndex} className={styles.featuredTag}>{tag}</span>
-                    ))}
-                  </div>
-
-                  <div className={styles.linksContainer}>
-                    {featuredProject.links.map((link, lIndex) => (
-                      <a key={lIndex} href={link.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
-                        {link.label}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M7 7h10v10" /></svg>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* Regular Projects Grid */}
+        {/* Unified Projects Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -323,7 +276,7 @@ export default function Projects() {
             animate="visible"
             exit="hidden"
           >
-            {regularProjects.map((project) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project.title}
                 className={styles.card}
