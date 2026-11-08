@@ -60,8 +60,8 @@ const projects: Project[] = [
     ],
     metrics: [
       { label: "Net Revenue", value: "$35M" },
-      { label: "YoY Lift", value: "+115.5%" },
-      { label: "Margin Leakage", value: "-70 bps" }
+      { label: "YoY Growth", value: "+115.5%" },
+      { label: "Margin Leak", value: "-70 bps" }
     ],
     filterGroups: ["Business Intelligence & SQL", "Product & Experimentation"]
   },
@@ -77,8 +77,8 @@ const projects: Project[] = [
     ],
     metrics: [
       { label: "Coverage", value: "52 Cities" },
-      { label: "Infrastructure", value: "$0 Serverless" },
-      { label: "Pipeline", value: "Near Real-Time" }
+      { label: "Infra Cost", value: "$0 Serverless" },
+      { label: "Pipeline", value: "Real-Time" }
     ],
     filterGroups: ["Data Engineering & Cloud", "Business Intelligence & SQL"]
   },
@@ -93,7 +93,7 @@ const projects: Project[] = [
     ],
     metrics: [
       { label: "Precision", value: "83%" },
-      { label: "Dataset", value: "180K+ Orders" },
+      { label: "Volume", value: "180K+ Orders" },
       { label: "Framework", value: "Anti-Leakage" }
     ],
     filterGroups: ["Machine Learning & AI", "Business Intelligence & SQL"]
@@ -108,9 +108,9 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/arik147/customer-segmentation-retail" }
     ],
     metrics: [
-      { label: "Cohort", value: "100K+ Customers" },
+      { label: "Cohort", value: "100K+ Users" },
       { label: "Method", value: "RFM & K-Means" },
-      { label: "Projected Lift", value: "+15% Retention" }
+      { label: "Target Lift", value: "+15% Ret." }
     ],
     filterGroups: ["Product & Experimentation", "Machine Learning & AI"]
   },
@@ -125,9 +125,9 @@ const projects: Project[] = [
       { label: "Dashboard", url: "https://lookerstudio.google.com/u/0/reporting/f104b007-8130-4741-978d-7ab351bb1102/page/tdadD" }
     ],
     metrics: [
-      { label: "BI Platform", value: "Looker Studio" },
-      { label: "Workflow", value: "Automated Clean" },
-      { label: "Domain", value: "Waste Bank Ops" }
+      { label: "Platform", value: "Looker Studio" },
+      { label: "Pipeline", value: "Auto-Clean" },
+      { label: "Domain", value: "Waste Ops" }
     ],
     filterGroups: ["Business Intelligence & SQL"]
   },
@@ -141,8 +141,9 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/arik147/sales-case-study" }
     ],
     metrics: [
-      { label: "Engine", value: "BigQuery SQL" },
-      { label: "Domain", value: "Retail Analytics" }
+      { label: "SQL Engine", value: "BigQuery" },
+      { label: "Dataset", value: "Retail Sales" },
+      { label: "Viz Stack", value: "Pandas/Seaborn" }
     ],
     filterGroups: ["Business Intelligence & SQL"]
   },
@@ -157,7 +158,8 @@ const projects: Project[] = [
     ],
     metrics: [
       { label: "Program", value: "Google Capstone" },
-      { label: "Objective", value: "Casual to Member" }
+      { label: "Objective", value: "Member Conv." },
+      { label: "Tech Stack", value: "R & Tableau" }
     ],
     filterGroups: ["Product & Experimentation", "Business Intelligence & SQL"]
   },
@@ -171,8 +173,9 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/arik147/twitter-sentiment-analysis" }
     ],
     metrics: [
-      { label: "Model", value: "Transformers" },
-      { label: "Task", value: "Sentiment Mining" }
+      { label: "Architecture", value: "Transformers" },
+      { label: "Pipeline", value: "HuggingFace" },
+      { label: "Task", value: "NLP Mining" }
     ],
     filterGroups: ["Machine Learning & AI"]
   },
@@ -187,7 +190,8 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/arik147/diagnese-app" }
     ],
     metrics: [
-      { label: "Deployment", value: "Cloud Run" },
+      { label: "Cloud Infra", value: "Cloud Run" },
+      { label: "Backend", value: "Flask & Docker" },
       { label: "Program", value: "Bangkit Capstone" }
     ],
     filterGroups: ["Machine Learning & AI", "Data Engineering & Cloud"]
@@ -203,8 +207,9 @@ const projects: Project[] = [
       { label: "GitHub", url: "https://github.com/Amzar123/be-sd-ciwaregu" }
     ],
     metrics: [
-      { label: "Backend", value: "Express & Docker" },
-      { label: "Database", value: "Cloud SQL Postgres" }
+      { label: "Backend", value: "Express.js" },
+      { label: "Database", value: "Cloud SQL" },
+      { label: "Deployment", value: "Docker / CI/CD" }
     ],
     filterGroups: ["Data Engineering & Cloud"]
   }
